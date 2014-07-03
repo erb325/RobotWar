@@ -77,8 +77,11 @@ typedef NS_ENUM(NSInteger, RobotState) {
         
         if (angle >= 0) {
             [self turnRobotLeft:abs(90)];
+            [self turnGunLeft:90];
+            
         } else {
-            [self turnRobotRight:abs(angle)];
+            [self turnRobotRight:abs(90)];
+            [self turnGunRight:90];
             
         }
         
