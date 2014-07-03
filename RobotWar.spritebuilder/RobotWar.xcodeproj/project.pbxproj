@@ -45,7 +45,7 @@
 		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
 		BC7636FB195BBCAA0070222B /* SimpleRobot.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7636F9195BBCAA0070222B /* SimpleRobot.m */; };
 		BCA5F346195BD4DA00F1A2DF /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCA5F345195BD4DA00F1A2DF /* GLKit.framework */; };
-		E66032A41965E010006EDA80 /* eRobot.m in Sources */ = {isa = PBXBuildFile; fileRef = E66032A31965E010006EDA80 /* eRobot.m */; };
+		E66032AB1965E31A006EDA80 /* eRobot.m in Sources */ = {isa = PBXBuildFile; fileRef = E66032AA1965E31A006EDA80 /* eRobot.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,8 +121,8 @@
 		BC7636F8195BBCAA0070222B /* SimpleRobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleRobot.h; path = Source/Robot/SimpleRobot.h; sourceTree = "<group>"; };
 		BC7636F9195BBCAA0070222B /* SimpleRobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleRobot.m; path = Source/Robot/SimpleRobot.m; sourceTree = "<group>"; };
 		BCA5F345195BD4DA00F1A2DF /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		E66032A21965E010006EDA80 /* eRobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eRobot.h; sourceTree = "<group>"; };
-		E66032A31965E010006EDA80 /* eRobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eRobot.m; sourceTree = "<group>"; };
+		E66032A91965E31A006EDA80 /* eRobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eRobot.h; path = Source/Robot/eRobot.h; sourceTree = "<group>"; };
+		E66032AA1965E31A006EDA80 /* eRobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = eRobot.m; path = Source/Robot/eRobot.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,9 +150,9 @@
 		624A3882193E7AF90054705C /* Robots */ = {
 			isa = PBXGroup;
 			children = (
-				E66032A21965E010006EDA80 /* eRobot.h */,
-				E66032A31965E010006EDA80 /* eRobot.m */,
 				65CC9158196141CF00838899 /* TurretRobot.h */,
+				E66032A91965E31A006EDA80 /* eRobot.h */,
+				E66032AA1965E31A006EDA80 /* eRobot.m */,
 				65CC9159196141CF00838899 /* TurretRobot.m */,
 				BC7636F6195BBCAA0070222B /* AdvancedRobot.h */,
 				BC7636F7195BBCAA0070222B /* AdvancedRobot.m */,
@@ -395,8 +395,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6236628E19612C5500ECB220 /* AdvancedRobot.m in Sources */,
+				E66032AB1965E31A006EDA80 /* eRobot.m in Sources */,
 				629FCFF4193E71C300896E8C /* GameOverScene.m in Sources */,
-				E66032A41965E010006EDA80 /* eRobot.m in Sources */,
 				6244629A1937DDD300895F2D /* Robot.m in Sources */,
 				BC7636FB195BBCAA0070222B /* SimpleRobot.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
