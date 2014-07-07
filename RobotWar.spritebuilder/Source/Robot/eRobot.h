@@ -8,6 +8,17 @@
 
 #import "Robot.h"
 
+
+typedef NS_ENUM(NSInteger, RobotState) {
+    RobotStateDefault,
+    RobotStateTurnaround,
+    RobotStateFiring,
+    RobotStateSearching
+};
+
 @interface eRobot : Robot
+
+
+@property (nonatomic, assign) RobotState currentRobotState;
 
 @end

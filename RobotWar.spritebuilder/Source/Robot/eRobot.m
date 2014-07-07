@@ -9,96 +9,123 @@
 #import "eRobot.h"
 
 
-typedef NS_ENUM(NSInteger, RobotState) {
-    RobotStateDefault,
-    RobotStateTurnaround,
-    RobotStateFiring,
-    RobotStateSearching
-};
-
 @implementation eRobot {
-    RobotState _currentRobotState;
-    
     CGPoint _lastKnownPosition;
     CGFloat _lastKnownPositionTimestamp;
-   
-
+    
+    int actionIndex;
 }
 
-int gunAngle = 0;
-
 - (void)run {
+    actionIndex = 0;
     while (true) {
-        if (_currentRobotState == RobotStateFiring) {
-            
-            if ((self.currentTimestamp - _lastKnownPositionTimestamp) > 1.f) {
-                _currentRobotState = RobotStateSearching;
-            } else {
-                CGFloat angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
-                if (angle >= 0) {
-                    [self turnGunRight:abs(angle)];
-                } else {
-                    [self turnGunLeft:abs(angle)];
-                }
-                [self shoot];
-            }
+        
+        while (_currentRobotState == RobotStateFiring) {
+            [self performNextFiringAction];
         }
         
-        if (_currentRobotState == RobotStateSearching) {
-            [self moveAhead:50];
-            [self turnRobotLeft:20];
-            [self moveAhead:50];
-            [self turnRobotRight:20];
+        while (_currentRobotState == RobotStateSearching) {
+            [self performNextSearchingAction];
         }
         
-        if (_currentRobotState == RobotStateDefault) {
-            [self moveAhead:100];
+        while (_currentRobotState == RobotStateDefault) {
+            [self performNextDefaultAction];
         }
     }
 }
 
-- (void)bulletHitEnemy:(Bullet *)bullet {
-    // There are a couple of neat things you could do in this handler
+- (void)performNextDefaultAction {
+    switch (actionIndex%1) {
+        case 0:
+            [self moveAhead:100];
+            
+            break;
+    }
+    actionIndex++;
 }
 
-//- (void)scannedRobot:(Robot *)robot atPosition:(CGPoint)position {
-//    if (_currentRobotState != RobotStateFiring) {
-//        [self cancelActiveAction];
-//    }
-//    
-//    _lastKnownPosition = position;
-//    _lastKnownPositionTimestamp = self.currentTimestamp;
-//    _currentRobotState = RobotStateFiring;
-//}
+- (void) performNextFiringAction {
+    if ((self.currentTimestamp - _lastKnownPositionTimestamp) > 1.f) {
+        self.currentRobotState = RobotStateSearching;
+    } else {
+        CGFloat angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+        if (angle >= 0) {
+            [self turnGunRight:abs(angle)];
+            
+        } else {
+            [self turnGunLeft:abs(angle)];
+            
+        }
+        [self shoot];
+    }
+}
+
+- (void)performNextSearchingAction {
+    switch (actionIndex%4) {
+        case 0:
+            [self moveAhead:50];
+            break;
+            
+        case 1:
+            [self turnRobotLeft:50];
+            break;
+            
+        case 2:
+            [self moveAhead:50];
+            break;
+            
+        case 3:
+            [self turnRobotRight:50];
+            break;
+    }
+    actionIndex++;
+}
+
+- (void)bulletHitEnemy:(Bullet *)bullet {
+    
+    [self moveAhead:100];
+    [self shoot];
+    
+}
+
+- (void)scannedRobot:(Robot *)robot atPosition:(CGPoint)position {
+    if (_currentRobotState != RobotStateFiring) {
+        [self cancelActiveAction];
+    }
+    
+    _lastKnownPosition = position;
+    _lastKnownPositionTimestamp = self.currentTimestamp;
+    self.currentRobotState = RobotStateFiring;
+}
 
 - (void)hitWall:(RobotWallHitDirection)hitDirection hitAngle:(CGFloat)angle {
     if (_currentRobotState != RobotStateTurnaround) {
         [self cancelActiveAction];
         
         RobotState previousState = _currentRobotState;
-        _currentRobotState = RobotStateTurnaround;
+        self.currentRobotState = RobotStateTurnaround;
         
-        
-        
-        
+        // always turn to head straight away from the wall
         if (angle >= 0) {
             [self turnRobotLeft:abs(90)];
-            [self turnGunLeft:90];
-//            [self turnGunLeft:gunAngle];
-//            [self shoot];
-//            
-//            gunAngle ++;
-            
+            [self moveAhead:50];
         } else {
             [self turnRobotRight:abs(90)];
-            [self turnGunRight:90];
+            [self moveAhead:50];
             
         }
         
         [self moveAhead:20];
         
-        _currentRobotState = previousState;
+        self.currentRobotState = previousState;
     }
 }
+
+- (void)setCurrentRobotState:(RobotState)currentRobotState {
+    _currentRobotState = currentRobotState;
+    actionIndex = 0;
+}
+
+
 
 @end
