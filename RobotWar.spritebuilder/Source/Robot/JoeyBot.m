@@ -65,6 +65,37 @@ typedef NS_ENUM(NSInteger, RobotState) {
                 }
                 _robotHug = 0;
             }
+            
+            // bottom left
+            if (coords.x < 26 && coords.y > 0)
+            {
+                [self moveBack:50];
+//                [self turnRobotLeft:90];
+//                [self moveAhead:100];
+//                [self turnRobotRight:90];
+                CGFloat angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+                
+                // sprinkler spray
+                angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+                CCLOG(@"gun angle: (%f)", angle);
+                while (angle < -135 && angle > 0) {
+                    [self turnGunLeft:10];
+                    [self shoot];
+                    angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+                    CCLOG(@"gun angle: (%f)", angle);
+                    int i = 0;
+                    if (angle == -135) {
+                        for (i = 0; i < 10; i++) {
+                            [self turnGunLeft:10];
+                            [self shoot];
+                            angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+                        }
+                    }
+                }
+                _robotHug = 0;
+            }
+            
+            
             // bottom right
             if (coords.x > 404 && coords.y > 81)
             {
