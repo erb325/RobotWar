@@ -7,19 +7,21 @@
 //
 
 #import "JoeyBot.h"
+
 typedef NS_ENUM(NSInteger, RobotState) {
     RobotStateDefault,
     RobotStateTurnaround,
     RobotStateFiring,
-    RobotStateSearching,
-    RobotStateHugging
+    RobotStateSearching
 };
 
 @implementation JoeyBot {
     RobotState _currentRobotState;
-    //    RobotState _robotHug;
+    RobotState _robotHug;
     CGPoint _lastKnownPosition;
     CGFloat _lastKnownPositionTimestamp;
+    CGSize _arenaDimensions;
+    CGPoint _currentDirection;
 }
 
 #pragma mark - robot strategy
@@ -29,30 +31,75 @@ typedef NS_ENUM(NSInteger, RobotState) {
         if (_currentRobotState == RobotStateDefault)
         {
             CGPoint coords = [self getCoordinates];
-            CCLOG(@"coordinates: (%f,%f)", coords.x, coords.y);
-            //            _robotHug = 1;
-            _currentRobotState = RobotStateHugging;
+//            CCLOG(@"coordinates: (%f,%f)", coords.x, coords.y);
+            _robotHug = 1;
         }
-        if (_currentRobotState == RobotStateHugging)
-        {
+        if (_robotHug == 1) {
             CGPoint coords = [self getCoordinates];
+            CCLOG(@"coordinates: (%f,%f)", coords.x, coords.y);
+            
+            // robot turns towards wall
+            
+            // top left
             if (coords.x < 26 && coords.y > 200)
             {
                 [self moveBack:100];
                 [self turnRobotLeft:90];
                 [self moveAhead:100];
                 [self turnRobotRight:90];
-                //                _robotHug = 0;
+                CGFloat angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+                
+                // sprinkler spray
+                while (angle < 97 && angle > 0) {
+                    [self turnGunRight:10];
+                    [self shoot];
+                    angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+                    int i = 0;
+                    if (angle == -4) {
+                        for (i = 0; i < 10; i++) {
+                            [self turnGunLeft:10];
+                            [self shoot];
+                            angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+                        }
+                    }
+                }
+                _robotHug = 0;
+            }
+            // bottom right
+            if (coords.x > 404 && coords.y > 81)
+            {
+                [self moveBack:100];
+                [self turnRobotRight:90];
+                [self moveBack:100];
+                [self turnRobotLeft:90];
+                CGFloat angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+                
+                // sprinkler spray
+                angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+                CCLOG(@"gun angle: (%f)", angle);
+                
+                while (angle > -104 && angle < 3) {
+                    [self turnGunRight:10];
+                    [self shoot];
+                    angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+                    int i = 0;
+                     CCLOG(@"gun angle: (%f)", angle);
+                    if (angle == -104) {
+                        for (i = 0; i < 10; i++) {
+                            [self turnGunLeft:10];
+                            [self shoot];
+                            angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+                        }
+                    }
+                }
+                _robotHug = 0;
             }
         }
     }
 }
-
 - (void)hitWall:(RobotWallHitDirection)hitDirection hitAngle:(CGFloat)angle {
     if (_currentRobotState != RobotStateTurnaround) {
         [self cancelActiveAction];
-        
-        // RobotState previousState = _currentRobotState;
         _currentRobotState = RobotStateTurnaround;
         
         // always turn to head straight away from the wall
@@ -64,19 +111,26 @@ typedef NS_ENUM(NSInteger, RobotState) {
         }
         CGPoint coords = [self getCoordinates];
         CCLOG(@"coordinates: (%f,%f)", coords.x, coords.y);
-        
-        //        _robotHug = 1;
-        
-        _currentRobotState = RobotStateHugging;
+        _robotHug = 1;
+
     }
 }
-
-# pragma mark - helper methods
 
 - (CGPoint)getCoordinates
 {
     CGRect _boundingBox = [self robotBoundingBox];
     return ccp(_boundingBox.origin.x, _boundingBox.origin.y);
+}
+
+- (void)printStatus
+{
+    CCLOG(@"state = %d", _currentRobotState);
+    
+    CGPoint coords = [self getCoordinates];
+    CCLOG(@"coordinates: (%f,%f)", coords.x, coords.y);
+    
+    CGPoint direction = [self headingDirection];
+    CCLOG(@"Heading direction: (%f,%f)", direction.x, direction.y);
 }
 
 @end
