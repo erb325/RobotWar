@@ -18,6 +18,8 @@ typedef NS_ENUM(NSInteger, RobotState) {
 @implementation JoeyBot {
     RobotState _currentRobotState;
     RobotState _robotHug;
+    RobotState _beingScanned;
+    RobotState _ouchie;
     CGPoint _lastKnownPosition;
     CGFloat _lastKnownPositionTimestamp;
     CGSize _arenaDimensions;
@@ -39,7 +41,7 @@ typedef NS_ENUM(NSInteger, RobotState) {
             CCLOG(@"coordinates: (%f,%f)", coords.x, coords.y);
             
             // robot turns towards wall
-            
+                        _ouchie = FALSE;
             // top left
             if (coords.x < 26)
             {
@@ -78,14 +80,14 @@ typedef NS_ENUM(NSInteger, RobotState) {
                 
                 // sprinkler spray
                 angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
-                CCLOG(@"gun angle: (%f)", angle);
+//                CCLOG(@"gun angle: (%f)", angle);
                 
                 while (angle > -104 && angle < 3) {
                     [self turnGunRight:10];
                     [self shoot];
                     angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
                     int i = 0;
-                    CCLOG(@"gun angle: (%f)", angle);
+//                    CCLOG(@"gun angle: (%f)", angle);
                     if (angle == -104) {
                         for (i = 0; i < 10; i++) {
                             [self turnGunLeft:10];
@@ -96,20 +98,38 @@ typedef NS_ENUM(NSInteger, RobotState) {
                 }
                 _robotHug = 0;
             }
+            if (_ouchie == TRUE && _beingScanned == TRUE) {
+                [self moveAhead:300];
+                
+            }
         }
     }
 }
 
 
 //- (void)scannedRobot:(Robot *)robot atPosition:(CGPoint)position {
-//    if (_currentRobotState != RobotStateFiring) {
-//        [self cancelActiveAction];
+//    CGPoint currentPosition = [self position];
+//    CGSize arenaSize = [self arenaDimensions];
+//    float bodyLength = [self robotBoundingBox].size.width; //offset is 2 so we dont trigger hit wall
+//    _beingScanned = TRUE;
+//    CCLOG(@"being scanned");
+//
+//    if (_ouchie == TRUE) {
+//        if (currentPosition.y < arenaSize.height/2) {
+////            [self moveAhead:(currentPosition.y - bodyLength)];
+//            [self turnRobotLeft:90];
+//            [self moveAhead:200];
+//            [self turnGunLeft:90];
+//        }
+//        if (currentPosition.y > arenaSize.height/2) {
+//            CCLOG(@"AHHH!");
+//            [self turnRobotRight:180];
+//        } else {
+//            [self moveBack:(arenaSize.height - (currentPosition.y + bodyLength))];
+//        }    
 //    }
-//    
-//    _lastKnownPosition = position;
-//    _lastKnownPositionTimestamp = self.currentTimestamp;
-//    [self moveAhead:300];
 //}
+
 
 - (void)hitWall:(RobotWallHitDirection)hitDirection hitAngle:(CGFloat)angle {
     if (_currentRobotState != RobotStateTurnaround) {
@@ -126,12 +146,13 @@ typedef NS_ENUM(NSInteger, RobotState) {
         CGPoint coords = [self getCoordinates];
         CCLOG(@"coordinates: (%f,%f)", coords.x, coords.y);
         _robotHug = 1;
-
     }
 }
 
 - (void)bulletHitEnemy:(Bullet *)bullet {
     [self shoot];
+    _ouchie = TRUE;
+    CCLOG(@"I shot the sheriff");
 }
 
 
