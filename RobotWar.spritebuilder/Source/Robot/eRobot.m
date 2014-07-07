@@ -21,7 +21,11 @@ typedef NS_ENUM(NSInteger, RobotState) {
     
     CGPoint _lastKnownPosition;
     CGFloat _lastKnownPositionTimestamp;
+   
+
 }
+
+int gunAngle = 0;
 
 - (void)run {
     while (true) {
@@ -75,10 +79,19 @@ typedef NS_ENUM(NSInteger, RobotState) {
         _currentRobotState = RobotStateTurnaround;
         
         
+        
+        
         if (angle >= 0) {
             [self turnRobotLeft:abs(90)];
+            [self turnGunLeft:90];
+//            [self turnGunLeft:gunAngle];
+//            [self shoot];
+//            
+//            gunAngle ++;
+            
         } else {
-            [self turnRobotRight:abs(angle)];
+            [self turnRobotRight:abs(90)];
+            [self turnGunRight:90];
             
         }
         
