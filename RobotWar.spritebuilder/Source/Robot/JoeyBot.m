@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, RobotState) {
             // robot turns towards wall
             
             // top left
-            if (coords.x < 26 )
+            if (coords.x < 26)
             {
                 [self moveBack:100];
                 [self turnRobotLeft:90];
@@ -64,40 +64,11 @@ typedef NS_ENUM(NSInteger, RobotState) {
                     }
                 }
                 _robotHug = 0;
+                
             }
             
-//            // bottom left
-//            if (coords.x < 26 && coords.y > 0)
-//            {
-//                [self moveBack:50];
-//                [self turnRobotLeft:90];
-//                [self moveAhead:100];
-//                [self turnRobotRight:90];
-//                CGFloat angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
-//                
-//                // sprinkler spray
-//                angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
-//                CCLOG(@"gun angle: (%f)", angle);
-//                while (angle < -135 && angle > 0) {
-//                    [self turnGunLeft:10];
-//                    [self shoot];
-//                    angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
-//                    CCLOG(@"gun angle: (%f)", angle);
-//                    int i = 0;
-//                    if (angle == -135) {
-//                        for (i = 0; i < 10; i++) {
-//                            [self turnGunLeft:10];
-//                            [self shoot];
-//                            angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
-//                        }
-//                    }
-//                }
-//                _robotHug = 0;
-//            }
-            
-            
             // bottom right
-            if (coords.x > 404 && coords.y > 81)
+            if (coords.x > 404)
             {
                 [self moveBack:100];
                 [self turnRobotRight:90];
@@ -114,7 +85,7 @@ typedef NS_ENUM(NSInteger, RobotState) {
                     [self shoot];
                     angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
                     int i = 0;
-                     CCLOG(@"gun angle: (%f)", angle);
+                    CCLOG(@"gun angle: (%f)", angle);
                     if (angle == -104) {
                         for (i = 0; i < 10; i++) {
                             [self turnGunLeft:10];
@@ -128,6 +99,18 @@ typedef NS_ENUM(NSInteger, RobotState) {
         }
     }
 }
+
+
+//- (void)scannedRobot:(Robot *)robot atPosition:(CGPoint)position {
+//    if (_currentRobotState != RobotStateFiring) {
+//        [self cancelActiveAction];
+//    }
+//    
+//    _lastKnownPosition = position;
+//    _lastKnownPositionTimestamp = self.currentTimestamp;
+//    [self moveAhead:300];
+//}
+
 - (void)hitWall:(RobotWallHitDirection)hitDirection hitAngle:(CGFloat)angle {
     if (_currentRobotState != RobotStateTurnaround) {
         [self cancelActiveAction];
@@ -146,6 +129,11 @@ typedef NS_ENUM(NSInteger, RobotState) {
 
     }
 }
+
+- (void)bulletHitEnemy:(Bullet *)bullet {
+    [self shoot];
+}
+
 
 - (CGPoint)getCoordinates
 {

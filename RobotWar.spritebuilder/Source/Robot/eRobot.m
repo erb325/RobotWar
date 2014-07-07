@@ -19,9 +19,25 @@
 - (void)run {
     actionIndex = 0;
     while (true) {
+<<<<<<< HEAD
         
         while (_currentRobotState == RobotStateFiring) {
             [self performNextFiringAction];
+=======
+        if (_currentRobotState == RobotStateFiring) {
+            
+            if ((self.currentTimestamp - _lastKnownPositionTimestamp) > 1.f) {
+                _currentRobotState = RobotStateSearching;
+            } else {
+                CGFloat angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
+                if (angle >= 0) {
+                    [self turnGunLeft:abs(angle)];
+                } else {
+                    [self turnGunRight:abs(angle)];
+                }
+                [self shoot];
+            }
+>>>>>>> 93f7253c22834d284b28b8a824744b17bc4a8fb8
         }
         
         while (_currentRobotState == RobotStateSearching) {

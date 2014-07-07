@@ -30,4 +30,7 @@ static NSString *robotCreator1 = @"Joey";
 static NSString *robotClass2 = @"eRobot";
 static NSString *robotCreator2 = @"Ember";
 
+//static NSString *robotClass2 = @"eRobot";
+//static NSString *robotCreator2 = @"Ember";
+
 #endif
