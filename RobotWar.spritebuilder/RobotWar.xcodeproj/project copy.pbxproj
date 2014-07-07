@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C38D952196AE0760048143D /* eRobot.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C38D94F196AE0760048143D /* eRobot.m */; };
-		5C38D953196AE0760048143D /* JoeyBot.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C38D951196AE0760048143D /* JoeyBot.m */; };
+		5CD416C51965E1DB00ED93E0 /* JoeyBot.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD416C41965E1DB00ED93E0 /* JoeyBot.m */; };
+		6236628E19612C5500ECB220 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		6244629A1937DDD300895F2D /* Robot.m in Sources */ = {isa = PBXBuildFile; fileRef = 624462991937DDD300895F2D /* Robot.m */; };
 		629FCFF4193E71C300896E8C /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 629FCFF3193E71C300896E8C /* GameOverScene.m */; };
 		62C4F430194141DE0047553C /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 62C4F42F194141DE0047553C /* Helpers.m */; };
@@ -47,6 +47,7 @@
 		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
 		BC0E62DC196A0CB600AED4CF /* NewAdvancedRobot.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0E62DB196A0CB600AED4CF /* NewAdvancedRobot.m */; };
 		BCA5F346195BD4DA00F1A2DF /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCA5F345195BD4DA00F1A2DF /* GLKit.framework */; };
+		E66032AB1965E31A006EDA80 /* eRobot.m in Sources */ = {isa = PBXBuildFile; fileRef = E66032AA1965E31A006EDA80 /* eRobot.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,10 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5C38D94E196AE0760048143D /* eRobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eRobot.h; sourceTree = "<group>"; };
-		5C38D94F196AE0760048143D /* eRobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eRobot.m; sourceTree = "<group>"; };
-		5C38D950196AE0760048143D /* JoeyBot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoeyBot.h; sourceTree = "<group>"; };
-		5C38D951196AE0760048143D /* JoeyBot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoeyBot.m; sourceTree = "<group>"; };
+		5CD416C41965E1DB00ED93E0 /* JoeyBot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JoeyBot.m; path = Source/Robot/JoeyBot.m; sourceTree = "<group>"; };
 		624462981937DDD300895F2D /* Robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Robot.h; path = Source/Robot.h; sourceTree = "<group>"; };
 		624462991937DDD300895F2D /* Robot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Robot.m; path = Source/Robot.m; sourceTree = "<group>"; };
 		624A3880193E79620054705C /* Robot_Framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Robot_Framework.h; path = Source/Robot_Framework.h; sourceTree = "<group>"; };
@@ -126,6 +124,7 @@
 		BC0E62DA196A0CB600AED4CF /* NewAdvancedRobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAdvancedRobot.h; sourceTree = "<group>"; };
 		BC0E62DB196A0CB600AED4CF /* NewAdvancedRobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAdvancedRobot.m; sourceTree = "<group>"; };
 		BCA5F345195BD4DA00F1A2DF /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		E66032AA1965E31A006EDA80 /* eRobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = eRobot.m; path = Source/Robot/eRobot.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,10 +176,6 @@
 		65CC917619648EEE00838899 /* Robots */ = {
 			isa = PBXGroup;
 			children = (
-				5C38D94E196AE0760048143D /* eRobot.h */,
-				5C38D94F196AE0760048143D /* eRobot.m */,
-				5C38D950196AE0760048143D /* JoeyBot.h */,
-				5C38D951196AE0760048143D /* JoeyBot.m */,
 				65CC917719648EEE00838899 /* AdvancedRobot.h */,
 				65CC917819648EEE00838899 /* AdvancedRobot.m */,
 				65CC917919648EEE00838899 /* SimpleRobot.h */,
@@ -400,17 +395,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6236628E19612C5500ECB220 /* (null) in Sources */,
+				E66032AB1965E31A006EDA80 /* eRobot.m in Sources */,
 				629FCFF4193E71C300896E8C /* GameOverScene.m in Sources */,
-				5C38D952196AE0760048143D /* eRobot.m in Sources */,
 				6244629A1937DDD300895F2D /* Robot.m in Sources */,
 				65CC917E19648EEE00838899 /* SimpleRobot.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
+				5CD416C51965E1DB00ED93E0 /* JoeyBot.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				62C4F430194141DE0047553C /* Helpers.m in Sources */,
 				65CC917F19648EEE00838899 /* TurretRobot.m in Sources */,
 				65CC917D19648EEE00838899 /* AdvancedRobot.m in Sources */,
-				5C38D953196AE0760048143D /* JoeyBot.m in Sources */,
 				62E3A32419397BE400BD3F0F /* RobotAction.m in Sources */,
 				62E3A330193D3F3B00BD3F0F /* Bullet.m in Sources */,
 				BC0E62DC196A0CB600AED4CF /* NewAdvancedRobot.m in Sources */,
