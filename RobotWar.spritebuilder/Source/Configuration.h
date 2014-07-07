@@ -12,11 +12,11 @@
 //static NSString *robotClass1 = @"eRobot";
 //static NSString *robotCreator1 = @"Ember";
 
-static NSString *robotClass1 = @"NewAdvancedRobot";
-static NSString *robotCreator1 = @"Jeremy";
+//static NSString *robotClass1 = @"NewAdvancedRobot";
+//static NSString *robotCreator1 = @"Jeremy";
 
-//static NSString *robotClass1 = @"JoeyBot";
-//static NSString *robotCreator1 = @"Joey";
+static NSString *robotClass1 = @"JoeyBot";
+static NSString *robotCreator1 = @"Joey";
 
 //static NSString *robotClass1 = @"HarlanBot";
 //static NSString *robotCreator1 = @"Harlan";
@@ -27,10 +27,13 @@ static NSString *robotCreator1 = @"Jeremy";
 //static NSString *robotClass2 = @"JoeyBot";
 //static NSString *robotCreator2 = @"Joey";
 
+static NSString *robotClass2 = @"eRobot";
+static NSString *robotCreator2 = @"Ember";
+
 //static NSString *robotClass2 = @"eRobot";
 //static NSString *robotCreator2 = @"Ember";
 
-static NSString *robotClass2 = @"LiveRobot";
-static NSString *robotCreator2 = @"Dion";
+//static NSString *robotClass2 = @"LiveRobot";
+//static NSString *robotCreator2 = @"Dion";
 
 #endif
