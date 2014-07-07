@@ -36,9 +36,9 @@ int gunAngle = 0;
             } else {
                 CGFloat angle = [self angleBetweenGunHeadingDirectionAndWorldPosition:_lastKnownPosition];
                 if (angle >= 0) {
-                    [self turnGunRight:abs(angle)];
-                } else {
                     [self turnGunLeft:abs(angle)];
+                } else {
+                    [self turnGunRight:abs(angle)];
                 }
                 [self shoot];
             }

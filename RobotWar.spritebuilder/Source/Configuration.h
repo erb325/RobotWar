@@ -27,4 +27,7 @@ static NSString *robotCreator1 = @"Jeremy";
 static NSString *robotClass2 = @"JoeyBot";
 static NSString *robotCreator2 = @"Joey";
 
+//static NSString *robotClass2 = @"eRobot";
+//static NSString *robotCreator2 = @"Ember";
+
 #endif
