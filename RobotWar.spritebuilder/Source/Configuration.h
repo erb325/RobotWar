@@ -15,7 +15,7 @@
 //static NSString *robotClass1 = @"NewAdvancedRobot";
 //static NSString *robotCreator1 = @"Jeremy";
 
-static NSString *robotClass1 = @"JoeyBot";
+static NSString *robotClass1 = @"LiveRobot";
 static NSString *robotCreator1 = @"Joey";
 
 //static NSString *robotClass1 = @"HarlanBot";

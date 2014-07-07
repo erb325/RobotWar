@@ -13,7 +13,8 @@ typedef NS_ENUM(NSInteger, RobotState) {
     RobotStateDefault,
     RobotStateTurnaround,
     RobotStateFiring,
-    RobotStateSearching
+    RobotStateSearching,
+    RobotStateWaiting
 };
 
 @interface eRobot : Robot
